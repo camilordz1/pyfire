@@ -11,7 +11,7 @@ Agiliza las consultas a la base de datos utilizando la librería "Pyrebase". Pyr
 ### Instalación
 
 ```
-pip install pyfire
+pip install pyfiredb
 ```
 
 ### Uso
@@ -19,13 +19,13 @@ pip install pyfire
 Un ejemplo para usar este paquete, la configuración de firebase y credenciales de acceso se han tomado desde las variables de entorno
 
 ```python
-from pyfire import Settings
-from pyfire import Database
-from pyfire import Session
+from pyfiredb import Credentials
+from pyfiredb import Database
+from pyfiredb import Session
 
 
 def run():
-    fire = Session(Settings.user, Settings.password)
+    fire = Session(Credentials.user, Credentials.password)
     firebase = Database(fire)
     print(firebase.equal("alegra/products", "reference", "TP-19100"))
     print(firebase.get("woocommerce/products"))
