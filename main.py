@@ -1,6 +1,6 @@
-from pyfire import Credentials
-from pyfire import Database
-from pyfire import Session
+from pyfiredb import Credentials
+from pyfiredb import Database
+from pyfiredb import Session
 
 
 def run():

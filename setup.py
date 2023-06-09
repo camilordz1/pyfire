@@ -7,7 +7,7 @@ long_description = (this_directory / "README.md").read_text()
 VERSION = '0.0.1'
 DESCRIPTION = 'pyfire is a package that simplifies querying with Pyrebase,\
     making interactions with Firebase databases effortless.'
-PACKAGE_NAME = 'pyfire'
+PACKAGE_NAME = 'pyfiredb'
 AUTHOR = 'Camilo Andrés Rodríguez'
 EMAIL = 'andres.roh@gmail.com'
 GITHUB_URL = 'https://github.com/andresroh/pyfire'
