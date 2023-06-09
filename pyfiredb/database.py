@@ -27,13 +27,14 @@ class Database:
         result = session.db.child(path).get(session.login['idToken']).val()
         return tuple(dict(result).values())
 
-    def equal(self, path, param, equal_to) -> tuple:
+    def equal(self, path, param, equal_to) -> dict:
 
         session = self.session
         result = session.db.child(path).order_by_child(param).equal_to(
             equal_to).get(session.login['idToken']).val()
-
-        return tuple(dict(result).values())
+        if result:
+            return list(dict(result).values())[0]
+        return {}
 
     def between(self, path, param, start, end) -> tuple:
 
@@ -43,10 +44,13 @@ class Database:
 
         return tuple(dict(result).values())
 
-    def max(self, path, param) -> tuple:
+    def max(self, path, param, equal=False) -> tuple:
 
         session = self.session
-        result = session.db.child(path).order_by_child(param).limit_to_last(
-            1).get(self.login['idToken']).val()
-
+        
+        if equal:
+            result = session.db.child(path).equal_to(param).limit_to_last(1).get(session.login['idToken']).val()
+            return tuple(dict(result).values())
+        
+        result = session.db.child(path).order_by_child(param).limit_to_last(1).get(session.login['idToken']).val()
         return tuple(dict(result).values())
