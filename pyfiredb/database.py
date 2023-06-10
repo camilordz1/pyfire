@@ -44,15 +44,17 @@ class Database:
 
         return tuple(dict(result).values())
 
-    def max(self, path, param, equal=False) -> tuple:
+    def max(self, path, param, equal_to=False) -> dict:
 
         session = self.session
 
-        if equal:
-            result = session.db.child(path).equal_to(param).limit_to_last(
-                1).get(session.login['idToken']).val()
-            return tuple(dict(result).values())
+        if equal_to:
+            result = session.db.child(path).order_by_child(param).equal_to(
+                equal_to).limit_to_last(1).get(session.login['idToken']).val()
+        else:
+            result = session.db.child(path).order_by_child(
+                param).limit_to_last(1).get(session.login['idToken']).val()
 
-        result = session.db.child(path).order_by_child(
-            param).limit_to_last(1).get(session.login['idToken']).val()
-        return tuple(dict(result).values())
+        if result:
+            return list(dict(result).values())[0]
+        return {}
