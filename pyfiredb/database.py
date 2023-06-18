@@ -1,59 +1,58 @@
 class Database:
 
-    def __init__(self, session) -> None:
-        self.session = session
+    def __init__(self, database) -> None:
+        self.bd = database
 
     def update(self, data) -> None:
-        session = self.session
+        database = self.bd
         if data is not None:
-            session.db.update(data, session.login['idToken'])
+            database.db.update(data, database.login['idToken'])
 
     def update_batch(self, path, input, index) -> None:
 
         if input is []:
             return
 
-        session = self.session
         data: dict = {}
 
         for i, value in enumerate(input, index):
-            value["id_list"] = i
+            value["id_list"] = i + 1
             data[f"{path}/{value['id']}"] = value
 
-        session.db.update(data)
+        self.update(data)
 
     def get(self, path) -> tuple:
-        session = self.session
-        result = session.db.child(path).get(session.login['idToken']).val()
+        database = self.bd
+        result = database.db.child(path).get(database.login['idToken']).val()
         return tuple(dict(result).values())
 
     def equal(self, path, param, equal_to) -> dict:
 
-        session = self.session
-        result = session.db.child(path).order_by_child(param).equal_to(
-            equal_to).get(session.login['idToken']).val()
+        database = self.bd
+        result = database.db.child(path).order_by_child(param).equal_to(
+            equal_to).get(database.login['idToken']).val()
+
         if result:
             return list(dict(result).values())[0]
-        return {}
 
     def between(self, path, param, start, end) -> tuple:
 
-        session = self.session
-        result = session.db.child(path).order_by_child(param).start_at(
-            start).end_at(end).get(session.login['idToken']).val()
+        database = self.bd
+        result = database.db.child(path).order_by_child(param).start_at(
+            start).end_at(end).get(database.login['idToken']).val()
 
         return tuple(dict(result).values())
 
     def max(self, path, param, equal_to=False) -> dict:
 
-        session = self.session
+        database = self.bd
 
         if equal_to:
-            result = session.db.child(path).order_by_child(param).equal_to(
-                equal_to).limit_to_last(1).get(session.login['idToken']).val()
+            result = database.db.child(path).order_by_child(param).equal_to(
+                equal_to).limit_to_last(1).get(database.login['idToken']).val()
         else:
-            result = session.db.child(path).order_by_child(
-                param).limit_to_last(1).get(session.login['idToken']).val()
+            result = database.db.child(path).order_by_child(
+                param).limit_to_last(1).get(database.login['idToken']).val()
 
         if result:
             return list(dict(result).values())[0]
