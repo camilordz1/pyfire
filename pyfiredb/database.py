@@ -3,12 +3,13 @@ class Database:
     def __init__(self, database) -> None:
         self.bd = database
 
-    def update(self, data) -> None:
+    def update(self, data: dict) -> None:
+
         database = self.bd
         if data is not None:
             database.db.update(data, database.login['idToken'])
 
-    def update_batch(self, path, input, index) -> None:
+    def update_batch(self, path: str, input: list, index: int) -> None:
 
         if input is []:
             return
@@ -21,12 +22,13 @@ class Database:
 
         self.update(data)
 
-    def get(self, path) -> tuple:
+    def get(self, path: str) -> tuple:
+
         database = self.bd
         result = database.db.child(path).get(database.login['idToken']).val()
         return tuple(dict(result).values())
 
-    def equal(self, path, param, equal_to) -> dict:
+    def equal(self, path: str, param: str, equal_to: str | int) -> dict:
 
         database = self.bd
         result = database.db.child(path).order_by_child(param).equal_to(
@@ -35,7 +37,7 @@ class Database:
         if result:
             return list(dict(result).values())[0]
 
-    def between(self, path, param, start, end) -> tuple:
+    def between(self, path: str, param: str, start: int, end: int) -> tuple:
 
         database = self.bd
         result = database.db.child(path).order_by_child(param).start_at(
@@ -43,7 +45,7 @@ class Database:
 
         return tuple(dict(result).values())
 
-    def max(self, path, param, equal_to=False) -> dict:
+    def max(self, path, param: str, equal_to: bool = False) -> dict:
 
         database = self.bd
 
