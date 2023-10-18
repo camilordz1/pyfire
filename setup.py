@@ -4,12 +4,12 @@ from pathlib import Path
 this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text()
 
-VERSION = '0.0.5'
+VERSION = '0.0.6'
 DESCRIPTION = 'pyfire is a package that simplifies querying with Pyrebase,\
     making interactions with Firebase databases effortless.'
 PACKAGE_NAME = 'pyfiredb'
 AUTHOR = 'Camilo Andrés Rodríguez'
-EMAIL = 'andres.roh@gmail.com'
+EMAIL = 'andres.roh@outlook.com'
 GITHUB_URL = 'https://github.com/andresroh/pyfire'
 
 setup(
