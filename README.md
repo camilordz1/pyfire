@@ -1,4 +1,4 @@
-# AlegraPy
+# pyfiredb
 
 Agiliza las consultas a la base de datos utilizando la librería "Pyrebase". Pyrebase es una biblioteca de Python que proporciona una interfaz para interactuar con Firebase, una plataforma de desarrollo de aplicaciones web y móviles.
 
@@ -45,7 +45,7 @@ if __name__ == "__main__":
 
 ## referencias
 
-- https://developer.alegra.com/
+- https://github.com/nhorvath/Pyrebase4
 
 
 ## Licencia
