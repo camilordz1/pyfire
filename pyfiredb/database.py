@@ -1,3 +1,5 @@
+from typing import Union
+
 class Database:
 
     def __init__(self, database) -> None:
@@ -22,13 +24,15 @@ class Database:
 
         self.update(data)
 
-    def get(self, path: str) -> tuple:
+    def get(self, path: str, r_dict = False) -> tuple:
 
         database = self.bd
         result = database.db.child(path).get(database.login['idToken']).val()
+        if r_dict:
+            return dict(result)
         return tuple(dict(result).values())
 
-    def equal(self, path: str, param: str, equal_to: str | int) -> dict:
+    def equal(self, path: str, param: str, equal_to: Union[int, str]) -> dict:
 
         database = self.bd
         result = database.db.child(path).order_by_child(param).equal_to(
